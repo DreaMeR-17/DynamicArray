@@ -7,8 +7,7 @@ namespace DynamicArray
     {
         static void Main(string[] args)
         {
-            int[] userNumbers = new int[0];          
-            int sum = 0;
+            int[] userNumbers = new int[0];
 
             string commandExit = "exit";
             string commandSum = "sum";
@@ -18,7 +17,15 @@ namespace DynamicArray
 
             while (isWork)
             {
-                Console.WriteLine($"Введите любое число.\nДля суммирования этих числе введите {commandSum}." +
+                foreach (int number in userNumbers)
+                {
+                    Console.Write($"{number} ");
+                }
+
+                Console.WriteLine();
+                Console.WriteLine();
+
+                Console.WriteLine($"Для суммирования чисел введите {commandSum}." +
                                    $"\nДля выхода из программы введите {commandExit}.");
                 Console.Write("Массив чисел: ");
 
@@ -31,21 +38,23 @@ namespace DynamicArray
                     isWork = false;
                     Console.Clear();
                 }
-
-                else if(userInput.ToLower() == commandSum)
+                else if (userInput.ToLower() == commandSum)
                 {
-                    foreach (int number in userNumbers)
+                    int sum = 0;
+
+                    foreach (int userNumber in userNumbers)
                     {
-                        sum += number;
+                        sum += userNumber;
                     }
 
-                    Console.WriteLine($"\nСумма всех введенных чисел: {sum}.\nДля продолжение нажмите любую клавишу.");
+                    Console.WriteLine($"Сумма всех введенных чисел: {sum}.\nДля продолжение нажмите любую клавишу.");
                     Console.ReadKey();
                     Console.Clear();
                 }
-
-                else if(int.TryParse(userInput, out int number))
+                else
                 {
+                    int.TryParse(userInput, out int number);
+
                     int[] tempNumbers = new int[userNumbers.Length + 1];
 
                     for (int i = 0; i < userNumbers.Length; i++)
@@ -55,19 +64,6 @@ namespace DynamicArray
 
                     tempNumbers[userNumbers.Length] = number;
                     userNumbers = tempNumbers;
-
-                    Console.WriteLine("Все введенные числа: ");
-
-                    foreach (int userNumber in userNumbers)
-                    {
-                        Console.Write(userNumber + " ");
-                    }
-                }
-
-                else
-                {
-                    Console.WriteLine("Неправильный ввод.");
-                    Console.Clear();
                 }
             }
         }
