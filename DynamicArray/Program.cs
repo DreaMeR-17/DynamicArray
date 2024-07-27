@@ -23,7 +23,6 @@ namespace DynamicArray
                 }
 
                 Console.WriteLine();
-                Console.WriteLine();
 
                 Console.WriteLine($"Для суммирования чисел введите {commandSum}." +
                                    $"\nДля выхода из программы введите {commandExit}.");
